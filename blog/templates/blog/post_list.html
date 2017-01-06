@@ -1,4 +1,19 @@
-<html>
-    <p>Selam! </p>
-    <p>Ne Haber Hacer yengeeeeee :D !</p>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div>
+  <a href="{% url 'post_new' %}" > <span class="glyphicon glyphicon-plus"></span> Yeni Gönderi Ekle</a>
+</div>
+{% endif %}
+
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.yayinlama_tarihi }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.baslik }}</a></h1>
+            <!-- <p>{{ post.yazi|linebreaks }}</p> -->
+        </div>
+    {% endfor %}
+{% endblock content %}
